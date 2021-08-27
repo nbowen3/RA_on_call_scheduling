@@ -1,5 +1,5 @@
 import java.io.*;
-import java.util.Scanner;
+import java.util.*;
 
 public class Scheduler {
 
@@ -20,18 +20,22 @@ public class Scheduler {
         System.out.println("Please type an end date for scheduling in the form MM/DD/YYYY");
         String endDate = input.nextLine();
 
-        /*
-        BufferedReader input;
+
+        BufferedReader inputBuffer;
         try {
-            input = new BufferedReader(new FileReader(inputFileName));
+            inputBuffer = new BufferedReader(new FileReader(inputFileName));
+
+            List<Person> people = new ArrayList<>();
 
             String line;
-            while ((line = input.readLine()) != null) {
-                String[] params = line.replaceAll("\\s", "").split("|");
+            while ((line = inputBuffer.readLine()) != null) {
+                String[] params = line.replaceAll("\\s", "").split("\\|");
 
-                for (String p : params) {
-                    System.out.println(p);
-                }
+                people.add(getPerson(params));
+            }
+
+            for (Person p : people) {
+                System.out.println(p);
             }
 
         } catch (IOException e) {
@@ -39,7 +43,21 @@ public class Scheduler {
             System.err.println("Input file was not found.");
             return;
         }
-        */
+    }
 
+    // Class to get a person given an array of params in the form
+    // element 0 is name, element 1 is days, element 2 is dates
+    private static Person getPerson(String[] params) {
+        String name = params[0];
+
+        Set<String> days = new HashSet<>();
+        String[] tempDays = params[1].split(",");
+        Collections.addAll(days, tempDays);
+
+        Set<String> dates = new HashSet<>();
+        String[] tempDates = params[2].split(",");
+        Collections.addAll(dates, tempDates);
+
+        return new Person(name, days, dates);
     }
 }

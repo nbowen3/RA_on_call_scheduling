@@ -1,4 +1,4 @@
-import java.util.List;
+import java.util.Set;
 
 public class Person {
 
@@ -6,13 +6,13 @@ public class Person {
     private String name;
 
     // Days of the week the person cannot perform duty.
-    private List<String> days;
+    private Set<String> days;
 
     // Specific dates the person cannot perform duties.
-    private List<String> dates;
+    private Set<String> dates;
 
     // Constructor to create a Person.
-    public Person (String name, List<String> days, List<String> dates) {
+    public Person (String name, Set<String> days, Set<String> dates) {
         this.name = name;
         this.days = days;
         this.dates = dates;
@@ -25,21 +25,20 @@ public class Person {
 
     // Checks a day to see if the person can perform duty on that day.
     public boolean checkDay(String day) {
-        for (String currDay : days) {
-            if (currDay.equalsIgnoreCase(day)) {
-                return false;
-            }
-        }
-        return true;
+        return !days.contains(day);
     }
 
     // Checks a specific date to see if the person can perform duty on that date.
     public boolean checkDate(String date) {
-        for (String currDate : dates) {
-            if (currDate.equalsIgnoreCase(date)) {
-                return false;
-            }
-        }
-        return true;
+        return !dates.contains(date);
+    }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "name='" + name + '\'' +
+                ", days=" + days +
+                ", dates=" + dates +
+                '}';
     }
 }

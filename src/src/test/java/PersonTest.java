@@ -1,9 +1,7 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 import static org.junit.Assert.*;
 
@@ -14,8 +12,8 @@ public class PersonTest {
     @BeforeEach
     public void setup() {
         String name = "David";
-        List<String> dates = new ArrayList<>(Arrays.asList("09/21/2021", "10/15/2021", "11/23/2021"));
-        List<String> days = new ArrayList<>(Arrays.asList("Monday", "Friday"));
+        Set<String> dates = new HashSet<>(Arrays.asList("09/21/2021", "10/15/2021", "11/23/2021"));
+        Set<String> days = new HashSet<>(Arrays.asList("Monday", "Friday"));
         person = new Person(name, days, dates);
     }
 
